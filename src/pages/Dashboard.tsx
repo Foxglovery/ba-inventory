@@ -24,6 +24,7 @@ import {
   BatchPrediction as BatchIcon,
   ShoppingCart as OrderIcon,
   Logout as LogoutIcon,
+  Category as ProductIcon,
 } from '@mui/icons-material';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/config';
@@ -35,6 +36,7 @@ const menuItems = [
   { text: 'Kitchen', icon: <KitchenIcon />, path: '/kitchen' },
   { text: 'Fulfillment', icon: <ShippingIcon />, path: '/fulfillment' },
   { text: 'Inventory', icon: <InventoryIcon />, path: '/inventory' },
+  { text: 'Products', icon: <ProductIcon />, path: '/products' },
   { text: 'Batches', icon: <BatchIcon />, path: '/batches' },
   { text: 'Orders', icon: <OrderIcon />, path: '/orders' },
 ];

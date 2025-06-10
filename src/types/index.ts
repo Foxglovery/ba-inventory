@@ -32,6 +32,7 @@ export interface OilBatch {
 export interface Product {
   id: string;
   name: string;
+  abbreviation: string;
   recipe: {
     ingredients: {
       ingredientId: string;

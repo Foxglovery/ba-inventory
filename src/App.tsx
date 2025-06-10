@@ -12,6 +12,7 @@ const FulfillmentDashboard = React.lazy(() => import('./pages/fulfillment/Fulfil
 const Inventory = React.lazy(() => import('./pages/Inventory'));
 const BatchManagement = React.lazy(() => import('./pages/BatchManagement'));
 const OrderManagement = React.lazy(() => import('./pages/OrderManagement'));
+const ProductManagement = React.lazy(() => import('./pages/ProductManagement'));
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="inventory" element={<Inventory />} />
               <Route path="batches" element={<BatchManagement />} />
               <Route path="orders" element={<OrderManagement />} />
+              <Route path="products" element={<ProductManagement />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

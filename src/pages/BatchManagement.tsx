@@ -33,6 +33,7 @@ import { db } from '../firebase/config';
 import { Batch, Product, OilBatch } from '../types';
 import { generateBatchCode } from '../utils/batchCodeGenerator';
 import { QRCodeSVG } from 'qrcode.react';
+import { getProductAbbreviation, getProductFullName } from '../utils/productAbbreviations';
 
 const BatchManagement: React.FC = () => {
   const [batches, setBatches] = useState<Batch[]>([]);
@@ -104,7 +105,7 @@ const BatchManagement: React.FC = () => {
       const batchCode = generateBatchCode({
         dose: Number(formData.dose),
         cannabinoid: formData.cannabinoid,
-        productAcronym: selectedProduct.name.substring(0, 2).toUpperCase(),
+        productName: selectedProduct.name,
         oilBatchCode: selectedOilBatch.batchCode,
         batchNumber: 1, // TODO: Implement batch number tracking
       });

@@ -1,9 +1,10 @@
 import { format } from 'date-fns';
+import { getProductAbbreviation } from './productAbbreviations';
 
 interface GenerateBatchCodeParams {
   dose: number;
   cannabinoid: string;
-  productAcronym: string;
+  productName: string;
   oilBatchCode: string;
   batchNumber: number;
 }
@@ -11,14 +12,15 @@ interface GenerateBatchCodeParams {
 export const generateBatchCode = ({
   dose,
   cannabinoid,
-  productAcronym,
+  productName,
   oilBatchCode,
   batchNumber,
 }: GenerateBatchCodeParams): string => {
   const today = new Date();
   const dateStr = format(today, 'MM-DD-YY');
+  const productAbbr = getProductAbbreviation(productName);
   
-  return `${dose}${cannabinoid}${productAcronym}-${dateStr}-DC-${oilBatchCode}.${batchNumber}`;
+  return `${dose}${cannabinoid}${productAbbr}-${dateStr}-DC-${oilBatchCode}.${batchNumber}`;
 };
 
 export const parseBatchCode = (batchCode: string) => {
@@ -28,12 +30,12 @@ export const parseBatchCode = (batchCode: string) => {
   // Extract dose, cannabinoid, and product acronym
   const dose = parseInt(productInfo.match(/\d+/)?.[0] || '0');
   const cannabinoid = productInfo.match(/[A-Za-z]+/)?.[0] || '';
-  const productAcronym = productInfo.slice(dose.toString().length + cannabinoid.length);
+  const productAbbr = productInfo.slice(dose.toString().length + cannabinoid.length);
   
   return {
     dose,
     cannabinoid,
-    productAcronym,
+    productAbbr,
     date: dateInfo,
     oilBatchCode: oilBatch,
     batchNumber: parseInt(batchNumber),
