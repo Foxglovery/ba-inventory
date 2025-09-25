@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   AppBar,
   Box,
+  Button,
   CssBaseline,
   Drawer,
   IconButton,
@@ -27,6 +28,7 @@ import {
   Category as ProductIcon,
 } from '@mui/icons-material';
 import { signOut } from 'firebase/auth';
+import { keyframes } from '@emotion/react';
 import { auth } from '../firebase/config';
 
 const drawerWidth = 240;
@@ -40,6 +42,18 @@ const menuItems = [
   { text: 'Batches', icon: <BatchIcon />, path: '/batches' },
   { text: 'Orders', icon: <OrderIcon />, path: '/orders' },
 ];
+
+const floating = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(12px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
 
 const Dashboard: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -150,6 +164,29 @@ const Dashboard: React.FC = () => {
           mt: '64px',
         }}
       >
+        {location.pathname === '/' && (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: { xs: '60vh', sm: '70vh' },
+            }}
+          >
+            <Button
+              variant="contained"
+              color="primary"
+              sx={{
+                px: 4,
+                py: 2,
+                fontSize: '1.1rem',
+                animation: `${floating} 2.4s ease-in-out infinite`,
+              }}
+            >
+              Take Tylenol
+            </Button>
+          </Box>
+        )}
         <Outlet />
       </Box>
     </Box>
